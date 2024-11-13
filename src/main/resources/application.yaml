@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: taxi-eljanoub
+
+server:
+  port: 8080
+
+logging:
+  level:
+    root: INFO
+    com.taxi.eljanoub: DEBUG
