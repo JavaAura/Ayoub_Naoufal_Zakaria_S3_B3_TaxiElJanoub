@@ -84,25 +84,33 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public VehicleAnalyticsResponse getAnalytics() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAnalytics'");
+        VehicleAnalyticsResponse response = new VehicleAnalyticsResponse();
+        response.setTotalVehicles((long) vehicleRepository.findAll().size());
+        response.setAvailableVehicles(countByStatus(Status.AVAILABLE));
+        response.setOnTripVehicles(countByStatus(Status.ON_TRIP));
+        response.setUnavailableVehicles(countByStatus(Status.UNAVAILABLE));
+        response.setAverageMileage(getAverageMileage());
+        response.setMostPopularType(getMostPopularType());
+        return response;
     }
 
-    @Override
-    public Long countByStatus(Status status) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'countByStatus'");
-    }
+@Override
+public Long countByStatus(Status status) {
+    return vehicleRepository.countByStatus(status);
+}
 
-    @Override
-    public Double getAverageMileage() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAverageMileage'");
-    }
+@Override
+public Double getAverageMileage() {
+    Double avgMileage = vehicleRepository.getAverageMileage();
+    return avgMileage != null ? avgMileage : 0.0;
+}
 
-    @Override
-    public Type getMostPopularType() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getMostPopularType'");
+@Override
+public Type getMostPopularType() {
+    List<Object[]> typeCount = vehicleRepository.getVehicleTypeCount();
+    if (typeCount.isEmpty()) {
+        return null;
     }
+    return (Type) typeCount.get(0)[0];
+}
 }

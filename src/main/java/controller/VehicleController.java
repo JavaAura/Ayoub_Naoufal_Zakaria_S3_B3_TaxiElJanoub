@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dto.request.VehicleRequest;
+import dto.response.VehicleAnalyticsResponse;
 import dto.response.VehicleResponse;
 import lombok.AllArgsConstructor;
+import model.enums.Status;
+import model.enums.Type;
 import service.interfaces.VehicleService;
 
 @RestController
@@ -60,4 +63,25 @@ public class VehicleController {
                 })
                 .orElse(ResponseEntity.notFound().build());
     }
+
+     
+    @GetMapping("/analytics")
+    public ResponseEntity<VehicleAnalyticsResponse> getAnalytics() {
+        return ResponseEntity.ok(vehicleService.getAnalytics());
+    }
+
+    // @GetMapping("/analytics/status/{status}")
+    // public ResponseEntity<Long> getVehicleCountByStatus(@PathVariable Status status) {
+    //     return ResponseEntity.ok(vehicleService.countByStatus(status));
+    // }
+
+    // @GetMapping("/analytics/mileage/average")
+    // public ResponseEntity<Double> getAverageMileage() {
+    //     return ResponseEntity.ok(vehicleService.getAverageMileage());
+    // }
+
+    // @GetMapping("/analytics/type/popular")
+    // public ResponseEntity<Type> getMostPopularType() {
+    //     return ResponseEntity.ok(vehicleService.getMostPopularType());
+    // }
 }

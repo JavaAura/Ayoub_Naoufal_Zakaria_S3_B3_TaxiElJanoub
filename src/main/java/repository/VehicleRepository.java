@@ -25,6 +25,6 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
     @Query("SELECT AVG(v.mileage) FROM Vehicle v")
     Double getAverageMileage();
 
-    @Query("SELECT v.type, COUNT(v) as count FROM Vehicle v GROUP BY v.type ORDER BY count DESC")
-    List<Object[]> getMostPopularType();
+    @Query("SELECT v.type, COUNT(v) FROM Vehicle v GROUP BY v.type ORDER BY COUNT(v) DESC")
+    List<Object[]> getVehicleTypeCount();
 }

@@ -7,8 +7,8 @@ import model.enums.Type;
 public class VehicleAnalyticsResponse {
     private Long totalVehicles;
     private Long availableVehicles;
-    private Long reservedVehicles;
-    private Long maintenanceVehicles;
+    private Long onTripVehicles;
+    private Long unavailableVehicles;
     private Double averageMileage;
     private Type mostPopularType;
 } 
